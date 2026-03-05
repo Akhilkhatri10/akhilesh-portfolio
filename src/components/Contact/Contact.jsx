@@ -2,25 +2,29 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import.meta.env
 const Contact = () => {
   const form = useRef();
+  const [loading, setLoading] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_axbtt7a",  // Replace with your EmailJS Service ID
-        "template_1ziboq3",  // Replace with your EmailJS Template ID
-        form.current,
-        "Rz7W9pVF0HdDryNNL"  // Replace with your EmailJS Public Key
-      )
+    setLoading(true);
+
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAIL_SERVICE_ID,    // EmailJS Service ID
+      import.meta.env.VITE_EMAIL_TEMPLATE_ID,   // EmailJS Template ID
+      form.current,
+      import.meta.env.VITE_EMAIL_PUBLIC_KEY     // EmailJS Public Key
+    )
       .then(
         () => {
+          setLoading(false);
           setIsSent(true);
           form.current.reset(); // Reset form fields after sending
+          
           toast.success("Message sent successfully! ✅", {
             position: "top-right",
             autoClose: 3000,
@@ -30,9 +34,12 @@ const Contact = () => {
             draggable: true,
             theme: "dark",
           });
+
+          setTimeout(() => setIsSent(false), 2000);
         },
         (error) => {
-          console.error("Error sending message:", error);
+          console.error("FULL ERROR:", error);
+          setLoading(false);
           toast.error("Failed to send message. Please try again.", {
             position: "top-right",
             autoClose: 3000,
@@ -75,6 +82,7 @@ const Contact = () => {
             name="user_email"
             placeholder="Your Email"
             required
+            disabled={loading}
             className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
           />
           <input
@@ -82,6 +90,7 @@ const Contact = () => {
             name="user_name"
             placeholder="Your Name"
             required
+            disabled={loading}
             className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
           />
           <input
@@ -89,6 +98,7 @@ const Contact = () => {
             name="subject"
             placeholder="Subject"
             required
+            disabled={loading}
             className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
           />
           <textarea
@@ -96,15 +106,45 @@ const Contact = () => {
             placeholder="Message"
             rows="4"
             required
+            disabled={loading}
             className="w-full p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500"
           />
-          
+
           {/* Send Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-500 py-3 text-white font-semibold rounded-md hover:opacity-90 transition"
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-500 py-3 text-white font-semibold rounded-md hover:opacity-90 transition disabled:opacity-70"
           >
-            Send
+            {loading ? (
+              <>
+                <svg
+                  className="w-5 h-5 animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  />
+                </svg>
+                Sending...
+              </>
+            ) : isSent ? (
+              "✔ Sent!"
+            ) : (
+              "Send"
+            )}
           </button>
         </form>
       </div>

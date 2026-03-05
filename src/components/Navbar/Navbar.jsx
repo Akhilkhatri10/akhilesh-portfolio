@@ -34,11 +34,12 @@ const Navbar = () => {
     { id: "experience", label: "Experience" },
     { id: "work", label: "Projects" },
     { id: "education", label: "Education" },
+    { id: "contact", label: "Contact" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
+      className={`fixed top-0 w-full z-50 transition duration-300 px-[6vw] md:px-[6vw] lg:px-[8vw] ${
         isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
@@ -46,14 +47,14 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-lg font-semibold cursor-pointer">
           <span className="text-[#8245ec]">&lt;</span>
-          <span className="text-white">Tarun</span>
+          <span className="text-white">Akhilesh</span>
           <span className="text-[#8245ec]">/</span>
-          <span className="text-white">Kaushik</span>
+          <span className="text-white">Khatri</span>
           <span className="text-[#8245ec]">&gt;</span>
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-gray-300">
+        <ul className="hidden md:flex space-x-10 text-gray-300">
           {menuItems.map((item) => (
             <li
               key={item.id}
@@ -71,7 +72,7 @@ const Navbar = () => {
         {/* Social Icons */}
         <div className="hidden md:flex space-x-4">
           <a
-            href="https://github.com/codingmastr"
+            href="https://github.com/Akhilkhatri10"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-[#8245ec]"
@@ -79,7 +80,7 @@ const Navbar = () => {
             <FaGithub size={24} />
           </a>
           <a
-            href="https://www.linkedin.com/in/tarun-kaushik-553b441a4"
+            href="https://www.linkedin.com/in/akhilesh-khatri-78696b209"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-[#8245ec]"
