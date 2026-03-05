@@ -34,7 +34,7 @@ import jobhuntLogo from './assets/work_logo/jobhunt.png';
 import ecommerceLogo from './assets/work_logo/ecommercelogo.png';
 import chatApplicationLogo from './assets/work_logo/chatApplicationlogo.png';
 import twitterCloneLogo from './assets/work_logo/twitterClonelogo.png';
-import movieAppLogo from './assets/work_logo/movieappLogo.png';
+import movieAppLogo from './assets/work_logo/movieapplogo.png';
 
 export const SkillsInfo = [
   {
